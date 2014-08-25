@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kl0tl/unity-pm.git"
+  },
   "keywords": [
     "package",
     "manager",
@@ -14,6 +18,10 @@
   ],
   "author": "Cyril Sobierajewicz <sobierajewicz.cyril@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kl0tl/unity-pm/issues"
+  },
+  "homepage": "https://github.com/Kl0tl/unity-pm",
   "dependencies": {
     "archy": "0.0.2",
     "del": "^0.1.2",
