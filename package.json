@@ -1,0 +1,30 @@
+{
+  "name": "unity-pm",
+  "version": "0.0.0",
+  "description": "A package manager for the \\`.unitypackage\\` files downloaded from the Unity Asset Store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "package",
+    "manager",
+    "unity",
+    "unity3d"
+  ],
+  "author": "Cyril Sobierajewicz <sobierajewicz.cyril@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "archy": "0.0.2",
+    "del": "^0.1.2",
+    "fast-levenshtein": "^1.0.3",
+    "glob": "^4.0.5",
+    "native-promise-only": "^0.7.6-a",
+    "opn": "^1.0.0",
+    "query-string": "^1.0.0",
+    "read-json": "0.0.0",
+    "request": "^2.40.0",
+    "unity-asset-store-api": "git://github.com/Kl0tl/unity-asset-store-api",
+    "unity-asset-store-directory": "git://github.com/Kl0tl/unity-asset-store-directory"
+  }
+}
