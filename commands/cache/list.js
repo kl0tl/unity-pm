@@ -4,6 +4,7 @@ var path = require('path');
 
 var glob = require('glob');
 var archy = require('archy');
+
 var nfcall = require('../../lib/nfcall');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();

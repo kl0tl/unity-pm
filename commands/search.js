@@ -1,14 +1,13 @@
 'use strict';
 
 var path = require('path');
-var exec = require('child_process').execFile;
 
 var glob = require('glob');
 var readJson = require('read-json');
 var levenshtein = require('fast-levenshtein');
-var nfcall = require('../lib/nfcall');
-
 var api = require('unity-asset-store-api');
+
+var nfcall = require('../lib/nfcall');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
 

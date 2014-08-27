@@ -3,6 +3,7 @@
 var path = require('path');
 
 var del = require('del');
+
 var nfcall = require('../../lib/nfcall');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();

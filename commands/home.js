@@ -1,6 +1,7 @@
 'use strict';
 
 var opn = require('opn');
+
 var nfcall = require('../lib/nfcall');
 var lookupCommand = require('./lookup');
 
