@@ -6,13 +6,11 @@ var exec = require('child_process').execFile;
 var glob = require('glob');
 var readJson = require('read-json');
 var levenshtein = require('fast-levenshtein');
-var request = require('request');
-var queryString = require('query-string');
 var nfcall = require('../lib/nfcall');
 
+var api = require('unity-asset-store-api');
+
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
-var assetStoreSearchUrl = 'https://www.assetstore.unity3d.com/api/en-US/search/xplr/search.json';
-var assetStoreContentUrl = 'https://www.assetstore.unity3d.com/en/#!/content/';
 
 module.exports = function searchCommand(name, options) {
   var offline = options && options.offline || false;
@@ -54,25 +52,5 @@ function searchFromCache(name, options) {
 }
 
 function searchFromAssetStore(name, options) {
-  var params = queryString.stringify({
-    query: name, limit: options && options.limit || 99
-  });
-
-  return new Promise(function (resolve, reject) {
-      request({
-        url: assetStoreSearchUrl + '?' + params,
-        headers: {
-          'X-Unity-Session': '26c4202eb475d02864b40827dfff11a14657aa41'
-        }
-      }, function (err, res, body) {
-        if (err) reject(err);
-        else resolve(body);
-      });
-    })
-    .then(JSON.parse)
-    .then(function (res) {
-      return res.results.map(function (info) {
-        return { name: info.title, url: assetStoreContentUrl + info.link.id };
-      });
-    });
+  return api.get('packages/search.json', { query: name, limit: options && options.limit || 99 });
 }

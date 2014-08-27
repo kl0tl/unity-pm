@@ -29,9 +29,7 @@
     "glob": "^4.0.5",
     "native-promise-only": "^0.7.6-a",
     "opn": "^1.0.0",
-    "query-string": "^1.0.0",
     "read-json": "0.0.0",
-    "request": "^2.40.0",
     "unity-asset-store-api": "git://github.com/Kl0tl/unity-asset-store-api",
     "unity-asset-store-directory": "git://github.com/Kl0tl/unity-asset-store-directory"
   }
