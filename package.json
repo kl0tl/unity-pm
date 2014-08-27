@@ -1,6 +1,6 @@
 {
   "name": "unity-pm",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A package manager for the `.unitypackage` files downloaded from the Unity Asset Store",
   "main": "index.js",
   "scripts": {
