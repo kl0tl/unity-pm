@@ -1,11 +1,15 @@
 'use strict';
 
+var format = require('util').format;
 var path = require('path');
 
-var glob = require('glob');
 var archy = require('archy');
+var glob = require('glob');
+var Promise = require('native-promise-only');
+var readJson = require('read-json');
 
 var nfcall = require('../../lib/nfcall');
+var infoCommand = require('../info');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
 
@@ -27,25 +31,43 @@ module.exports = function cacheListCommand() {
     .then(archy);
 };
 
-function Package(pathOfPackage) {
-  this.name = path.basename(pathOfPackage);
-  this.path = pathOfPackage;
+function UnityPackage(unityPackagePath) {
+  this.name = path.basename(unityPackagePath, '.unitypackage');
+  this.path = unityPackagePath;
 }
 
-Package.prototype.toNode = function () {
-  return Promise.resolve({ label: this.name });
+UnityPackage.prototype.info = function () {
+  var unityPackage = this;
+
+  return nfcall(readJson, path.join(path.dirname(this.path), format('%s.json', this.name)))
+    .catch(function () { return infoCommand(unityPackage.name); });
 };
 
-function Category(pathOfCategory) {
-  this.name = path.basename(pathOfCategory);
-  this.path = pathOfCategory;
+UnityPackage.prototype.version = function () {
+  return this.info()
+    .then(function (info) { return info.version; })
+    .catch(function () { return '???'; });
+};
+
+UnityPackage.prototype.toNode = function () {
+  var unityPackage = this;
+
+  return this.version()
+    .then(function (version) {
+      return { label: format('%s@%s', unityPackage.name, version) };
+    });
+};
+
+function Category(categoryPath) {
+  this.name = path.basename(categoryPath);
+  this.path = categoryPath;
 }
 
 Category.prototype.packages = function () {
   return nfcall(glob, path.join(this.path, '*.unitypackage'))
     .then(function (packages) {
-      return packages.map(function (pathOfPackage) {
-        return new Package(pathOfPackage);
+      return packages.map(function (unityPackagePath) {
+        return new UnityPackage(unityPackagePath);
       });
     });
 };
@@ -64,16 +86,16 @@ Category.prototype.toNode = function () {
     });
 };
 
-function Publisher(pathOfPublisher) {
-  this.path = pathOfPublisher;
-  this.name = path.basename(pathOfPublisher);
+function Publisher(publisherPath) {
+  this.name = path.basename(publisherPath);
+  this.path = publisherPath;
 }
 
 Publisher.prototype.categories = function () {
   return nfcall(glob, path.join(this.path, '!(.*)'))
     .then(function (categories) {
-      return categories.map(function (pathOfCategory) {
-        return new Category(pathOfCategory);
+      return categories.map(function (categoryPath) {
+        return new Category(categoryPath);
       });
     });
 };
