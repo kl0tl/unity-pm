@@ -7,6 +7,7 @@ module.exports = {
   },
   home: require('./commands/home'),
   info: require('./commands/info'),
+  init: require('./commands/init'),
   list: require('./commands/list'),
   lookup: require('./commands/lookup'),
   search: require('./commands/search'),
