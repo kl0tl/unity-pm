@@ -1,9 +1,12 @@
 'use strict';
 
+var format = require('util').format;
+
 var infoCommand = require('./info');
 
-module.exports = function lookupCommand(name) {
-  return infoCommand(name).then(function (info) {
-    return info.url;
-  });
+module.exports = function lookupCommand(name, options) {
+  return infoCommand(name, options)
+    .then(function (info) {
+      return format('https://www.assetstore.unity3d.com/en/#!/content/%s', info.link.id);
+    });
 };
