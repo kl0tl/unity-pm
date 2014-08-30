@@ -5,7 +5,7 @@ var RcLoader = require('rcloader');
 var infoCommand = require('./info');
 var nfcall = require('../lib/nfcall');
 
-module.exports = function versionCommand(name, options) {
+module.exports = function (name, options) {
   var g = options && options.global || false;
   var method = g ? getGlobalPackageVersion : getLocalPackageVersion;
 

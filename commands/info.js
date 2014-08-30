@@ -17,7 +17,7 @@ var searchCommand = require('./search');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
 
-module.exports = function infoCommand(name, options) {
+module.exports = function (name, options) {
   var offline = options && options.offline || false;
   var method = offline ? infoFromCache : infoFromAssetStore;
 

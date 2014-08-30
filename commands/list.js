@@ -7,7 +7,7 @@ var RcLoader = require('rcloader');
 
 var nfcall = require('../lib/nfcall');
 
-module.exports = function listCommand() {
+module.exports = function () {
   var loader = new RcLoader('.asset-store-packages');
 
   return nfcall(loader.for, './')

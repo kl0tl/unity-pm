@@ -5,7 +5,7 @@ var fs = require('fs');
 var installCommand = require('./install');
 var nfcall = require('../lib/nfcall');
 
-module.exports = function initCommand(directory, packages) {
+module.exports = function (directory, packages) {
   var contents = JSON.stringify({ directory: directory, packages: {} }, null, '  ');
 
   return nfcall(fs.writeFile, contents)

@@ -14,7 +14,7 @@ var nfcall = require('../lib/nfcall');
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
 var assetStorePackageUrl = 'https://www.assetstore.unity3d.com/en/#!/content/%s';
 
-module.exports = function searchCommand(name, options) {
+module.exports = function (name, options) {
   var offline = options && options.offline || false;
   var method = offline ? searchFromCache : searchFromAssetStore;
 

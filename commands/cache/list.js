@@ -13,7 +13,7 @@ var infoCommand = require('../info');
 
 var assetStoreDirectoryPath = require('unity-asset-store-directory')();
 
-module.exports = function cacheListCommand() {
+module.exports = function () {
   return nfcall(glob, path.join(assetStoreDirectoryPath, '!(.*)'))
     .then(function (publishers) {
       return Promise.all(publishers.map(function (pathOfPublisher) {
