@@ -21,11 +21,11 @@ function getLocalPackageVersion(name) {
   var loader = new RcLoader('.asset-store-packages');
 
   return nfcall(loader.for, './')
-    .then(function (assetStorePackages) {
-      if (!(name in assetStorePackages.packages)) {
+    .then(function (dotfile) {
+      if (!(name in dotfile.packages)) {
         throw new Error();
       }
 
-      return assetStorePackages.packages[name];
+      return dotfile.packages[name];
     });
 }

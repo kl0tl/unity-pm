@@ -11,13 +11,13 @@ module.exports = function () {
   var loader = new RcLoader('.asset-store-packages');
 
   return nfcall(loader.for, './')
-    .then(function (assetStorePackages) {
-      var packages = Object.keys(assetStorePackages.packages).map(function (name) {
-        var version = assetStorePackages.packages[name];
+    .then(function (dotfile) {
+      var packages = Object.keys(dotfile.packages).map(function (name) {
+        var version = dotfile.packages[name];
         return { label: format('%s@%s', name, version) };
       });
 
-      return { label: assetStorePackages.directory, nodes: packages };
+      return { label: dotfile.directory, nodes: packages };
     })
     .then(archy);
 };
